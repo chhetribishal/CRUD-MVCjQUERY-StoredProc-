@@ -72,6 +72,32 @@ namespace TestApplication.Controllers
             return Json(dic);
 
         }
+        public JsonResult DeleteCountryMaster(string CountryID)
+        {
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            dic["Message"] = "";
+            try
+            {
+                string[,] Param = new string[,]
+                {
+                    {"@CountryID",CountryID },
+
+                };
+                DataTable dt = Common.ExecuteProcedure("DeleteCountryMaster", Param);
+                if (dt.Rows.Count > 0)
+                {
+                    dic["Message"]= dt.Rows[0]["Msg"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                dic["Message"] = ex.Message;
+
+            }
+            return Json(dic);
+
+
+        }
 
 
         public JsonResult ShowCountryMaster()

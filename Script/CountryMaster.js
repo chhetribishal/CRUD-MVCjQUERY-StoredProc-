@@ -76,6 +76,22 @@ function EditCountryMaster(CountryID) {
     }
 }
 
-function DeleteCountryMaster() {
+function DeleteCountryMaster(ID) {
+    try {
+        if (confirm("Do you Want to Delete This Item?")) {}
+        $.post("DeleteCountryMaster", {
+            CountryID: ID
+        }, function (data) {
+            if (data.Message != "") {
+                
+                alert(data.Message);
+                ShowCountryMaster();
+               
+            } 
+        }
+        );
 
+    } catch (e) {
+        alert("Error in DeleteCountryMaster:" + e.message);
+    }
 }
